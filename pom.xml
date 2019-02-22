@@ -3,12 +3,15 @@
   <groupId>com.bizislife.keycloak</groupId>
   <artifactId>keycloak-provider</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
   
   <properties>
    <apache.common.lang.version>3.8</apache.common.lang.version>
    <commons.codec.version>1.11</commons.codec.version>
    <jboss-jaxrs-api_2.1_spec>1.0.2.Final</jboss-jaxrs-api_2.1_spec>
    <keycloak.version>4.8.3.Final</keycloak.version>
+   <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+   <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
   </properties>
   
   <dependencies>
@@ -58,4 +61,27 @@
 	    <version>${commons.codec.version}</version>
 	</dependency>
   </dependencies>
+  <build>
+   <finalName>keycloak-provider-bundled</finalName>
+   <plugins>
+		<plugin>
+		   <groupId>org.apache.maven.plugins</groupId>
+		   <artifactId>maven-resources-plugin</artifactId>
+		   <version>${maven-resources-plugin.version}</version>
+		   <configuration>
+		      <useDefaultDelimiters>true</useDefaultDelimiters>
+		   </configuration>
+		</plugin>
+      <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler-plugin.version}</version>
+          <configuration>
+              <source>1.8</source>
+              <target>1.8</target>
+          </configuration>
+      </plugin>
+      
+   </plugins>
+  </build>
 </project>
