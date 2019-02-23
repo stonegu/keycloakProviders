@@ -19,7 +19,6 @@ public class UserResource {
 	private final KeycloakSession session;
 
 	public UserResource(KeycloakSession session) {
-		super();
 		this.session = session;
 	}
 	
@@ -35,7 +34,11 @@ public class UserResource {
     		@HeaderParam("Authorization") String token) {
     	
     	List<UserRepresentation> users = new ArrayList<UserRepresentation>();
-    	
+    	UserRepresentation user = new UserRepresentation();
+    	user.setFirstName("stone");
+    	user.setLastName("gu");
+    	user.setId("1111");
+    	users.add(user);
     	
     	return Response.ok(users).build();
     	

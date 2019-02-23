@@ -62,7 +62,6 @@
 	</dependency>
   </dependencies>
   <build>
-   <finalName>keycloak-provider-bundled</finalName>
    <plugins>
 		<plugin>
 		   <groupId>org.apache.maven.plugins</groupId>
