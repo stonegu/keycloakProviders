@@ -1,0 +1,2 @@
+#list all event listener here:
+com.bizislife.keycloak.event.BasicEventListenerProviderFactory

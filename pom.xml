@@ -12,6 +12,7 @@
    <keycloak.version>4.8.3.Final</keycloak.version>
    <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
    <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+   <lombok.version>1.18.4</lombok.version>
   </properties>
   
   <dependencies>
@@ -60,6 +61,14 @@
 	    <artifactId>commons-codec</artifactId>
 	    <version>${commons.codec.version}</version>
 	</dependency>
+   <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+      <version>${lombok.version}</version>
+   </dependency>
+	
+	
   </dependencies>
   <build>
    <plugins>

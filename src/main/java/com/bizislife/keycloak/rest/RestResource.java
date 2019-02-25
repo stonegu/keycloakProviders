@@ -5,9 +5,14 @@ import javax.ws.rs.Path;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.services.managers.AppAuthManager;
 import org.keycloak.services.managers.AuthenticationManager;
-import javax.ws.rs.ForbiddenException;
-import javax.ws.rs.NotAuthorizedException;
 
+import com.bizislife.keycloak.util.AuthenticateUtil;
+
+import lombok.extern.slf4j.Slf4j;
+
+import javax.ws.rs.ForbiddenException;
+
+@Slf4j
 public class RestResource {
 	private final KeycloakSession session;
     private final AuthenticationManager.AuthResult auth;
@@ -15,24 +20,27 @@ public class RestResource {
 	public RestResource(KeycloakSession session) {
 		this.session = session;
         this.auth = new AppAuthManager().authenticateBearerToken(session, session.getContext().getRealm());
+
 	}
 	
 	@Path("users")
-	public UserResource getUserResource() {
-		return new UserResource(session);
-	}
-	
-	@Path("users-auth")
 	public UserResource getUserResourceAuthenticated() {
-        checkRealmAdmin();
-		return new UserResource(session);
+		if (AuthenticateUtil.isClientUser(auth) || AuthenticateUtil.isAdminUser(auth)) {
+			return new UserResource(session);
+		} else {
+			log.error("User doesnot have client or admin role");
+			throw new ForbiddenException("Does not have client or admin role");
+		}
 	}
 	
-    private void checkRealmAdmin() {
-        if (auth == null) {
-            throw new NotAuthorizedException("Bearer");
-        } else if (auth.getToken().getRealmAccess() == null || !auth.getToken().getRealmAccess().isUserInRole("admin")) {
-            throw new ForbiddenException("Does not have realm admin role");
-        }
-    }
+	@Path("token")
+	public TokenResource getTokenResourceAuthenticated() {
+		if (AuthenticateUtil.isClientUser(auth) || AuthenticateUtil.isAdminUser(auth) || AuthenticateUtil.isGuestUser(auth)) {
+			return new TokenResource(session);
+		} else {
+			log.error("User doesnot have client or admin or guest role");
+			throw new ForbiddenException("Does not have client or admin or guest role");
+		}
+	}
+	
 }
