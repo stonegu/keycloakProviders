@@ -15,6 +15,9 @@ import org.jboss.resteasy.annotations.cache.NoCache;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.representations.idm.UserRepresentation;
 
+import com.bizislife.keycloak.model.CompanyRepresentation;
+import com.bizislife.keycloak.spi.CompanyService;
+
 public class UserResource {
 	private final KeycloakSession session;
 
@@ -43,6 +46,16 @@ public class UserResource {
     	return Response.ok(users).build();
     	
     }
+    
+    // this is for test spi (company)
+    @GET
+    @Path("companies")
+    @NoCache
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CompanyRepresentation> getCompanyList(@HeaderParam("Authorization") String token) {
+    	return session.getProvider(CompanyService.class).listCompanies();
+    }
+    
 	
 	
 	
