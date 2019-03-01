@@ -15,4 +15,33 @@
 4. modify xms and xmx in standalone.conf.bat like:
       set "JAVA_OPTS=-Xms512M -Xmx2048M -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m"
       
-5. SMTP Server: bizislife2019@gmail.com : stone0331      
+5. SMTP Server: bizislife2019@gmail.com : stone0331   
+
+6. SPI (Service Provider Interface : https://www.keycloak.org/docs/latest/server_development/index.html#_providers)
+   6.1 Register a provider using Modules
+      6.1.1 jboss-cli.sh: check the click above or check the example in C:\Projects\keycloak\examples\providers\domain-extension\README.md
+      6.1.2 manually register: 
+            a. create a folder like this : C:\Users\stone\Downloads\InstallApp\keycloak-4.8.3.Final\modules\com\bizislife\keycloak\main
+            b. copy keycloak-provider.jar and module.xml in this folder
+            example for module.xml:
+            +----------------------------------------------------------------------------
+            | <?xml version='1.0' encoding='UTF-8'?>
+            | <module xmlns="urn:jboss:module:1.1" name="com.bizislife.keycloak">
+            |
+            |    <resources>
+            |       <resource-root path="keycloak-provider.jar"/>
+            |    </resources>
+            |
+            |    <dependencies>
+            |        <module name="org.keycloak.keycloak-core"/>
+            |        <module name="org.keycloak.keycloak-services"/>
+            |        <module name="org.keycloak.keycloak-server-spi"/>
+            |        <module name="org.keycloak.keycloak-server-spi-private"/>
+            |        <module name="org.keycloak.keycloak-model-jpa"/>
+            |      <module name="javax.ws.rs.api"/>
+            |      <module name="org.slf4j"/>
+            |    </dependencies>
+            | </module>            
+            |            
+            +------------------------------------------------------------------------------
+            
