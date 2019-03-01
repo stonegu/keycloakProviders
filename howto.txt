@@ -18,6 +18,7 @@
 5. SMTP Server: bizislife2019@gmail.com : stone0331   
 
 6. SPI (Service Provider Interface : https://www.keycloak.org/docs/latest/server_development/index.html#_providers)
+Note: If you are creating a custom SPI you will need to deploy it as a module, otherwise we recommend using the Keycloak deployer approach.
    6.1 Register a provider using Modules
       6.1.1 jboss-cli.sh: check the click above or check the example in C:\Projects\keycloak\examples\providers\domain-extension\README.md
       6.1.2 manually register: 
