@@ -39,10 +39,18 @@ Note: If you are creating a custom SPI you will need to deploy it as a module, o
             |        <module name="org.keycloak.keycloak-server-spi"/>
             |        <module name="org.keycloak.keycloak-server-spi-private"/>
             |        <module name="org.keycloak.keycloak-model-jpa"/>
-            |      <module name="javax.ws.rs.api"/>
-            |      <module name="org.slf4j"/>
+            |        <module name="javax.ws.rs.api"/>
+            |        <module name="org.slf4j"/>
+            |        <module name="org.apache.commons.collections"/>
             |    </dependencies>
             | </module>            
             |            
             +------------------------------------------------------------------------------
-            
+            | How to determine the module name:
+            | 1. any libraries used should be in modules folder, for example, you can use org.apache.commons.collections.CollectionUtils,
+            |    but not org.apache.commons.collections4.CollectionUtils. 
+            |    This is because org.apache.commons.collections.CollectionUtils is under modules\system\layers\base\org\apache\commons\collections\main.
+            | 2. why module name is org.apache.commons.collections? 
+            |    because the module is under modules\system\layers\base\org\apache\commons\collections, 
+            |    and the module name in module.xml under modules\system\layers\base\org\apache\commons\collections\main is org.apache.commons.collections
+            +-----------------------------------------------------------------------------------

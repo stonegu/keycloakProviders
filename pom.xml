@@ -7,12 +7,14 @@
   
   <properties>
    <apache.common.lang.version>3.8</apache.common.lang.version>
+   <apache.common.collections.version>4.3</apache.common.collections.version>
    <commons.codec.version>1.11</commons.codec.version>
    <jboss-jaxrs-api_2.1_spec>1.0.2.Final</jboss-jaxrs-api_2.1_spec>
    <keycloak.version>4.8.3.Final</keycloak.version>
    <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
    <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
    <lombok.version>1.18.4</lombok.version>
+   <javax.persistence.version>2.2</javax.persistence.version>
   </properties>
   
   <dependencies>
@@ -56,6 +58,19 @@
 	    <artifactId>commons-lang3</artifactId>
 	    <version>${apache.common.lang.version}</version>
 	</dependency>
+<!-- 	
+	<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-collections4</artifactId>
+	    <version>${apache.common.collections.version}</version>
+	</dependency>
+ -->
+	<dependency>
+	    <groupId>commons-collections</groupId>
+	    <artifactId>commons-collections</artifactId>
+	    <version>3.2.2</version>
+	</dependency> 
+ 
 	<dependency>
 	    <groupId>commons-codec</groupId>
 	    <artifactId>commons-codec</artifactId>
@@ -66,6 +81,11 @@
       <artifactId>lombok</artifactId>
       <optional>true</optional>
       <version>${lombok.version}</version>
+   </dependency>
+   <dependency>
+       <groupId>javax.persistence</groupId>
+       <artifactId>javax.persistence-api</artifactId>
+       <version>${javax.persistence.version}</version>
    </dependency>
 	
 	
