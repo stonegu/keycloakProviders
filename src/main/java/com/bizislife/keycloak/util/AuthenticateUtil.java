@@ -49,6 +49,15 @@ public class AuthenticateUtil {
 		return false;
 	}
 	
+	public static boolean isBizUser(AuthenticationManager.AuthResult auth) {
+		if (isAuthenticatedBearerToken(auth)) {
+			return auth.getSession().getRealm().getName().equals(Realm.BIZ.name());
+		} else {
+			log.error("Token cannot be authorized!");
+			throw new NotAuthorizedException("Bearer");
+		}
+	}
+	
 	
 
 }

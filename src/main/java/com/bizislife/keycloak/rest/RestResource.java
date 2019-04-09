@@ -23,6 +23,17 @@ public class RestResource {
 
 	}
 	
+	@Path("company")
+	public CompanyResource getCompanyResourceAuthenticated() {
+		if (AuthenticateUtil.isBizUser(auth) && AuthenticateUtil.isAdminUser(auth)) {
+			return new CompanyResource(session);
+		} else {
+			log.error("User is not Biz user and/or doesnot have admin role");
+			throw new ForbiddenException("User is not Biz user and/or doesnot have admin role");
+		}
+		
+	}
+	
 	@Path("users")
 	public UserResource getUserResourceAuthenticated() {
 		if (AuthenticateUtil.isClientUser(auth) || AuthenticateUtil.isAdminUser(auth)) {
@@ -42,5 +53,7 @@ public class RestResource {
 			throw new ForbiddenException("Does not have client or admin or guest role");
 		}
 	}
+	
+	
 	
 }
