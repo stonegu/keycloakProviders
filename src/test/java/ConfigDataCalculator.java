@@ -12,7 +12,7 @@ public class ConfigDataCalculator {
         System.out.println(date1 / 60 + " mins - access");
         System.out.println(date2 / 60 + " mins - refresh");
 
-        System.out.println("security header: " + createSecureHeader("MOBILE", "2f1af6f8-03ac-47ef-b781-5fca8d40325e"));
+        System.out.println("security header: " + createSecureHeader("account", "54e7c4bd-7f1f-46f4-aea2-54bfd50d30bd"));
 		
 	}
 

@@ -13,6 +13,7 @@ public class AuthenticateUtil {
 		return auth != null;
 	}
 	
+	// has guest realm role
 	public static boolean isGuestUser(AuthenticationManager.AuthResult auth) {
 		if (isAuthenticatedBearerToken(auth)) {
 			if (auth.getToken().getRealmAccess() != null && auth.getToken().getRealmAccess().isUserInRole(Role.guest.name()) ) {
@@ -25,6 +26,7 @@ public class AuthenticateUtil {
 		return false;
 	}
 	
+	// has client realm role (like company's client)
 	public static boolean isClientUser(AuthenticationManager.AuthResult auth) {
 		if (isAuthenticatedBearerToken(auth)) {
 			if (auth.getToken().getRealmAccess() != null && auth.getToken().getRealmAccess().isUserInRole(Role.client.name()) ) {
@@ -37,6 +39,7 @@ public class AuthenticateUtil {
 		return false;
 	}
 	
+	// has admin realm role
 	public static boolean isAdminUser(AuthenticationManager.AuthResult auth) {
 		if (isAuthenticatedBearerToken(auth)) {
 			if (auth.getToken().getRealmAccess() != null && auth.getToken().getRealmAccess().isUserInRole(Role.admin.name()) ) {
@@ -49,6 +52,7 @@ public class AuthenticateUtil {
 		return false;
 	}
 	
+	// users under realm Biz
 	public static boolean isBizUser(AuthenticationManager.AuthResult auth) {
 		if (isAuthenticatedBearerToken(auth)) {
 			return auth.getSession().getRealm().getName().equals(Realm.BIZ.name());
