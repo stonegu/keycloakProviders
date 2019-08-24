@@ -9,6 +9,17 @@ import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 
+/*
+ * How to use: 
+ * 1. select realm in keycloak, and click Export to export realm settings (make Export group and rols & Export clients ON).
+ * 2. put download file under c:\\users\\stone\\downloads\\realm-export.json
+ * 3. update oldRealmName and newRealmName in this class
+ * 4. run the class, and copy the result from console screen
+ * 5. create file call new-realm-import.json, and paste the result to this file
+ * 6. Add realm in keycloak, and select new-realm-import.json
+ * 7. create and done!
+ * 
+*/
 public class RealmExportUpdate {
 	public static void main (String... args) {
 		
