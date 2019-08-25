@@ -10,7 +10,7 @@ import org.keycloak.connections.jpa.JpaConnectionProvider;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
 
-import com.bizislife.keycloak.jpa.Company;
+import com.bizislife.keycloak.jpa.pojo.Company;
 import com.bizislife.keycloak.model.CompanyRepresentation;
 import com.bizislife.keycloak.spi.CompanyService;
 

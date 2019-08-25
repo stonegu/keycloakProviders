@@ -3,6 +3,7 @@ package com.bizislife.keycloak.jpa;
 import java.util.Collections;
 import java.util.List;
 
+import com.bizislife.keycloak.jpa.pojo.Company;
 import org.keycloak.connections.jpa.entityprovider.JpaEntityProvider;
 import org.keycloak.models.KeycloakSession;
 

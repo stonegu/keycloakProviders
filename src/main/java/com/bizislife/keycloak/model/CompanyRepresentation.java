@@ -1,6 +1,6 @@
 package com.bizislife.keycloak.model;
 
-import com.bizislife.keycloak.jpa.Company;
+import com.bizislife.keycloak.jpa.pojo.Company;
 
 import lombok.Getter;
 import lombok.Setter;
