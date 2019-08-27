@@ -1,4 +1,4 @@
-package com.bizislife.keycloak.jpa.pojo;
+package com.bizislife.keycloak.model.pojo;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

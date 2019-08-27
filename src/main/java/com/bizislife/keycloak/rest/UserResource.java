@@ -3,26 +3,33 @@ package com.bizislife.keycloak.rest;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.bizislife.keycloak.model.rep.ProspectingUserRep;
+import com.bizislife.keycloak.spi.ProspectingUserProvider;
+import com.bizislife.keycloak.util.AuthenticateUtil;
+import com.bizislife.keycloak.util.GeneralUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.jboss.resteasy.annotations.cache.NoCache;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.representations.idm.UserRepresentation;
 
-import com.bizislife.keycloak.model.CompanyRepresentation;
+import com.bizislife.keycloak.model.rep.CompanyRepresentation;
 import com.bizislife.keycloak.spi.CompanyService;
+import org.keycloak.services.managers.AuthenticationManager;
 
+@Slf4j
 public class UserResource {
 	private final KeycloakSession session;
+	private final AuthenticationManager.AuthResult auth;
 
-	public UserResource(KeycloakSession session) {
+	public UserResource(KeycloakSession session, AuthenticationManager.AuthResult auth) {
 		this.session = session;
+		this.auth = auth;
 	}
 	
 
@@ -55,8 +62,37 @@ public class UserResource {
     public List<CompanyRepresentation> getCompanyList(@HeaderParam("Authorization") String token) {
     	return session.getProvider(CompanyService.class).listCompanies();
     }
-    
-	
+
+    @POST
+	@Path("prospecting")
+	@Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+	public Response addProspectingUser(@HeaderParam(HttpHeaders.AUTHORIZATION) String token,
+												 ProspectingUserRep prospectingUser
+												 ) {
+		if (!validateAddProspectingUser(prospectingUser)) {
+			return Response.status(Response.Status.PRECONDITION_FAILED).build();
+		}
+		if (!isActionForProspectingAllowed(auth, prospectingUser)) {
+			return Response.status(Response.Status.FORBIDDEN).build();
+		}
+		ProspectingUserRep user = session.getProvider(ProspectingUserProvider.class).addProspectingUser(auth.getSession().getRealm(), prospectingUser.getId(), prospectingUser.getEmail());
+		return Response.ok(user).build();
+	}
+
+	// only biz admin user or client account with same same realm Id can do it
+	private boolean isActionForProspectingAllowed(AuthenticationManager.AuthResult auth, ProspectingUserRep prospectingUser) {
+		if ( (AuthenticateUtil.isBizUser(auth) && AuthenticateUtil.hasAdminRealmRole(auth)) ||
+				(AuthenticateUtil.hasClientRealmRole(auth) && auth.getSession().getRealm().getId().equals(prospectingUser.getRealmId()))) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean validateAddProspectingUser(ProspectingUserRep user) {
+		return StringUtils.isNotEmpty(user.getRealmId()) && GeneralUtil.emailValidate(user.getEmail());
+	}
+
 	
 	
 }

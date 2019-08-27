@@ -1,20 +1,20 @@
-package com.bizislife.keycloak.jpa.impl;
+package com.bizislife.keycloak.spi.impl;
 
-import com.bizislife.keycloak.jpa.ProspectingUserProvider;
-import com.bizislife.keycloak.jpa.pojo.ProspectingUser;
-import com.bizislife.keycloak.model.ProspectingUserRep;
+import com.bizislife.keycloak.spi.ProspectingUserProvider;
+import com.bizislife.keycloak.model.pojo.ProspectingUser;
+import com.bizislife.keycloak.model.rep.ProspectingUserRep;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.RealmModel;
 import org.keycloak.models.utils.KeycloakModelUtils;
 
 import javax.persistence.EntityManager;
 
-public class JpaProspectingUserProvider implements ProspectingUserProvider {
+public class ProspectingUserProviderImpl implements ProspectingUserProvider {
 
     private final KeycloakSession session;
     protected EntityManager em;
 
-    public JpaProspectingUserProvider(KeycloakSession session, EntityManager em) {
+    public ProspectingUserProviderImpl(KeycloakSession session, EntityManager em) {
         this.session = session;
         this.em = em;
     }

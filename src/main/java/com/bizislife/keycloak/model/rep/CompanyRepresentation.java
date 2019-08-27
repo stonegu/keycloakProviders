@@ -1,4 +1,4 @@
-package com.bizislife.keycloak.model;
+package com.bizislife.keycloak.model.rep;
 
 import com.bizislife.keycloak.jpa.pojo.Company;
 

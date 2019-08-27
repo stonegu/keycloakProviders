@@ -25,7 +25,7 @@ public class RestResource {
 	
 	@Path("company")
 	public CompanyResource getCompanyResourceAuthenticated() {
-		if (AuthenticateUtil.isBizUser(auth) && AuthenticateUtil.isAdminUser(auth)) {
+		if (AuthenticateUtil.isBizUser(auth) && AuthenticateUtil.hasAdminRealmRole(auth)) {
 			return new CompanyResource(session);
 		} else {
 			log.error("User is not Biz user and/or doesnot have admin role");
@@ -34,10 +34,10 @@ public class RestResource {
 		
 	}
 	
-	@Path("users")
+	@Path("user")
 	public UserResource getUserResourceAuthenticated() {
-		if (AuthenticateUtil.isClientUser(auth) || AuthenticateUtil.isAdminUser(auth)) {
-			return new UserResource(session);
+		if (AuthenticateUtil.hasAdminRealmRole(auth) || AuthenticateUtil.hasUserRealmRole(auth) || AuthenticateUtil.hasClientRealmRole(auth)) {
+			return new UserResource(session, auth);
 		} else {
 			log.error("User doesnot have client or admin role");
 			throw new ForbiddenException("Does not have client or admin role");
@@ -46,7 +46,7 @@ public class RestResource {
 	
 	@Path("token")
 	public TokenResource getTokenResourceAuthenticated() {
-		if (AuthenticateUtil.isClientUser(auth) || AuthenticateUtil.isAdminUser(auth) || AuthenticateUtil.isGuestUser(auth)) {
+		if (AuthenticateUtil.hasAdminRealmRole(auth) || AuthenticateUtil.hasUserRealmRole(auth) || AuthenticateUtil.hasGuestRealmRole(auth)) {
 			return new TokenResource(session);
 		} else {
 			log.error("User doesnot have client or admin or guest role");

@@ -1,7 +1,6 @@
-package com.bizislife.keycloak.jpa;
+package com.bizislife.keycloak.spi;
 
-import com.bizislife.keycloak.jpa.pojo.ProspectingUser;
-import com.bizislife.keycloak.model.ProspectingUserRep;
+import com.bizislife.keycloak.model.rep.ProspectingUserRep;
 import org.keycloak.models.RealmModel;
 import org.keycloak.provider.Provider;
 

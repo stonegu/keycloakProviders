@@ -1,6 +1,6 @@
-package com.bizislife.keycloak.model;
+package com.bizislife.keycloak.model.rep;
 
-import com.bizislife.keycloak.jpa.pojo.ProspectingUser;
+import com.bizislife.keycloak.model.pojo.ProspectingUser;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

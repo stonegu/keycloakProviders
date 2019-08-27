@@ -14,7 +14,7 @@ public class AuthenticateUtil {
 	}
 	
 	// has guest realm role
-	public static boolean isGuestUser(AuthenticationManager.AuthResult auth) {
+	public static boolean hasGuestRealmRole(AuthenticationManager.AuthResult auth) {
 		if (isAuthenticatedBearerToken(auth)) {
 			if (auth.getToken().getRealmAccess() != null && auth.getToken().getRealmAccess().isUserInRole(Role.guest.name()) ) {
 				return true;
@@ -26,8 +26,21 @@ public class AuthenticateUtil {
 		return false;
 	}
 	
-	// has client realm role (like company's client)
-	public static boolean isClientUser(AuthenticationManager.AuthResult auth) {
+	// has user realm role
+	public static boolean hasUserRealmRole(AuthenticationManager.AuthResult auth) {
+		if (isAuthenticatedBearerToken(auth)) {
+			if (auth.getToken().getRealmAccess() != null && auth.getToken().getRealmAccess().isUserInRole(Role.user.name()) ) {
+				return true;
+			}
+		} else {
+			log.error("Token cannot be authorized!");
+			throw new NotAuthorizedException("Bearer");
+		}
+		return false;
+	}
+
+	// has client realm role (only clients have this role)
+	public static boolean hasClientRealmRole(AuthenticationManager.AuthResult auth) {
 		if (isAuthenticatedBearerToken(auth)) {
 			if (auth.getToken().getRealmAccess() != null && auth.getToken().getRealmAccess().isUserInRole(Role.client.name()) ) {
 				return true;
@@ -38,9 +51,9 @@ public class AuthenticateUtil {
 		}
 		return false;
 	}
-	
+
 	// has admin realm role
-	public static boolean isAdminUser(AuthenticationManager.AuthResult auth) {
+	public static boolean hasAdminRealmRole(AuthenticationManager.AuthResult auth) {
 		if (isAuthenticatedBearerToken(auth)) {
 			if (auth.getToken().getRealmAccess() != null && auth.getToken().getRealmAccess().isUserInRole(Role.admin.name()) ) {
 				return true;
