@@ -32,7 +32,7 @@ public class CompanyServiceImpl implements CompanyService{
 
 	@Override
 	public List<CompanyRepresentation> listCompanies() {
-		List<Company> companyEntities = getEntityManager().createNamedQuery("findByRealm", Company.class)
+		List<Company> companyEntities = getEntityManager().createNamedQuery("findCompanyByRealm", Company.class)
 				.setParameter("realmId", getRealm().getId())
 				.getResultList();
 		

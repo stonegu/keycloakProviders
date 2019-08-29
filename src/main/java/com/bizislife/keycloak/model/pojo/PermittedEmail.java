@@ -6,13 +6,17 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import static com.bizislife.keycloak.model.pojo.PermittedEmail.FIND_PERMITTED_EMAIL_BY_REALM;
+
 @Entity
 @Table(name = "PROSPECTING_EMAIL_ENTITY")
-@NamedQueries({ @NamedQuery(name = "findPermittedEmailByRealm", query = "from PermittedEmail where realmId = :realmId") })
+@NamedQueries({ @NamedQuery(name = FIND_PERMITTED_EMAIL_BY_REALM, query = "from PermittedEmail where realmId = :realmId") })
 @Getter
 @Setter
 @NoArgsConstructor
 public class PermittedEmail {
+    public static final String FIND_PERMITTED_EMAIL_BY_REALM = "findPermittedEmailByRealm";
+
     @Id
     @Column(name = "ID", length = 36)
     private String id;
