@@ -1,7 +1,8 @@
-package com.bizislife.keycloak.spi.impl;
+package com.bizislife.keycloak.spi.impl.provider;
 
 import com.bizislife.keycloak.spi.ProspectingUserProvider;
-import com.bizislife.keycloak.spi.ProspectingUserProviderFactory;
+import com.bizislife.keycloak.spi.impl.ProspectingUserProviderImpl;
+import com.bizislife.keycloak.spi.provider.ProspectingUserProviderFactory;
 import org.keycloak.Config;
 import org.keycloak.connections.jpa.JpaConnectionProvider;
 import org.keycloak.models.KeycloakSession;
@@ -33,6 +34,6 @@ public class ProspectingUserProviderFactoryImpl implements ProspectingUserProvid
 
     @Override
     public String getId() {
-        return "prospecting-user-jpa";
+        return "prospectingUserProviderImpl";
     }
 }

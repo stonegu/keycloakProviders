@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "PROSPECTING_USER_ENTITY")
-@NamedQueries({ @NamedQuery(name = "findByRealm", query = "from Company where realmId = :realmId") })
+@NamedQueries({ @NamedQuery(name = "findProspectingByRealm", query = "from ProspectingUser where realmId = :realmId") })
 @Getter
 @Setter
 @NoArgsConstructor

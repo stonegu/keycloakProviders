@@ -54,3 +54,8 @@ Note: If you are creating a custom SPI you will need to deploy it as a module, o
             |    because the module is under modules\system\layers\base\org\apache\commons\collections, 
             |    and the module name in module.xml under modules\system\layers\base\org\apache\commons\collections\main is org.apache.commons.collections
             +-----------------------------------------------------------------------------------
+            c. Then registering the provider by editing standalone/configuration/standalone.xml and adding the module to the providers element:
+               <providers>
+                   ...
+                   <provider>module:org.keycloak.examples.domain-extension-example</provider>
+               </providers>

@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "COMPANY")
-@NamedQueries({ @NamedQuery(name = "findByRealm", query = "from Company where realmId = :realmId") })
+@NamedQueries({ @NamedQuery(name = "findCompanyByRealm", query = "from Company where realmId = :realmId") })
 @Getter
 @Setter
 public class Company {
