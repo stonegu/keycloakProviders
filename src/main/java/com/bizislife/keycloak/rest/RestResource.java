@@ -43,7 +43,17 @@ public class RestResource {
 			throw new ForbiddenException("Does not have client or admin role");
 		}
 	}
-	
+
+	@Path("email")
+	public EmailResource getEmailResourceAuthenticated() {
+		if (AuthenticateUtil.hasAdminRealmRole(auth) || AuthenticateUtil.hasUserRealmRole(auth) || AuthenticateUtil.hasClientRealmRole(auth)) {
+			return new EmailResource(session, auth);
+		} else {
+			log.error("User doesnot have client or admin role");
+			throw new ForbiddenException("Does not have client or admin role");
+		}
+	}
+
 	@Path("token")
 	public TokenResource getTokenResourceAuthenticated() {
 		if (AuthenticateUtil.hasAdminRealmRole(auth) || AuthenticateUtil.hasUserRealmRole(auth) || AuthenticateUtil.hasGuestRealmRole(auth)) {

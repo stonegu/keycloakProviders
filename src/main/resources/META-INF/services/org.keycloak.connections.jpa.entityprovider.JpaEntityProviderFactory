@@ -1,2 +1,3 @@
 com.bizislife.keycloak.jpa.CompanyEntityProviderFactory
 com.bizislife.keycloak.model.pojo.provider.ProspectingUserEntityProviderFactory
+com.bizislife.keycloak.model.pojo.provider.PermittedEmailEntityProviderFactory

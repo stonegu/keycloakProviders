@@ -7,12 +7,12 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "PROSPECTING_USER_ENTITY")
-@NamedQueries({ @NamedQuery(name = "findProspectingUserByRealm", query = "from ProspectingUser where realmId = :realmId") })
+@Table(name = "PROSPECTING_EMAIL_ENTITY")
+@NamedQueries({ @NamedQuery(name = "findPermittedEmailByRealm", query = "from PermittedEmail where realmId = :realmId") })
 @Getter
 @Setter
 @NoArgsConstructor
-public class ProspectingUser {
+public class PermittedEmail {
     @Id
     @Column(name = "ID", length = 36)
     private String id;
@@ -25,9 +25,6 @@ public class ProspectingUser {
 
     @Column(name = "CREATED_TIMESTAMP", nullable = false)
     private Long createdTimestamp;
-
-    @Column(name = "STATUS", nullable = false)
-    private String status;
 
 
 }

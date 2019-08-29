@@ -10,6 +10,17 @@ CREATE TABLE `prospecting_user_entity` (
   UNIQUE(`EMAIL`, `REALM_ID`)
 ) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+DROP TABLE IF EXISTS prospecting_email_entity;
+
+CREATE TABLE `prospecting_email_entity` (
+  `ID` VARCHAR(36) COLLATE utf8_unicode_ci NOT NULL,
+  `EMAIL` VARCHAR(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `REALM_ID` VARCHAR(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `CREATED_TIMESTAMP` BIGINT(20) DEFAULT NULL
+  PRIMARY KEY (`ID`),
+  UNIQUE(`EMAIL`, `REALM_ID`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 
 
