@@ -34,7 +34,7 @@ public class EmailResource {
 		if (!validateAddPermittedEmail(permittedEmail)) {
 			return Response.status(Response.Status.PRECONDITION_FAILED).build();
 		}
-		if (!isActionForPermittedAllowed(auth, permittedEmail)) {
+		if (!isActionForPermittedEmailAllowed(auth, permittedEmail)) {
 			return Response.status(Response.Status.FORBIDDEN).build();
 		}
 		try {
@@ -47,7 +47,7 @@ public class EmailResource {
 	}
 
 	// only biz admin user or client account with same same realm Id can do it
-	private boolean isActionForPermittedAllowed(AuthenticationManager.AuthResult auth, PermittedEmailRep permittedEmail) {
+	private boolean isActionForPermittedEmailAllowed(AuthenticationManager.AuthResult auth, PermittedEmailRep permittedEmail) {
 		if ( (AuthenticateUtil.isBizUser(auth) && AuthenticateUtil.hasAdminRealmRole(auth)) ||
 				(AuthenticateUtil.hasClientRealmRole(auth) && auth.getSession().getRealm().getId().equals(permittedEmail.getRealmId()))) {
 			return true;

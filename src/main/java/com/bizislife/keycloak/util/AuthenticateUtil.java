@@ -40,6 +40,7 @@ public class AuthenticateUtil {
 	}
 
 	// has client realm role (only clients have this role)
+	// TODO: add client user check, not just based on role, which client realm role can be added to normal user!!
 	public static boolean hasClientRealmRole(AuthenticationManager.AuthResult auth) {
 		if (isAuthenticatedBearerToken(auth)) {
 			if (auth.getToken().getRealmAccess() != null && auth.getToken().getRealmAccess().isUserInRole(Role.client.name()) ) {
