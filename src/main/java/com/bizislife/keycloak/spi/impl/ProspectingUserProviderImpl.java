@@ -1,5 +1,6 @@
 package com.bizislife.keycloak.spi.impl;
 
+import com.bizislife.keycloak.model.common.UserStatus;
 import com.bizislife.keycloak.spi.ProspectingUserProvider;
 import com.bizislife.keycloak.model.pojo.ProspectingUser;
 import com.bizislife.keycloak.model.rep.ProspectingUserRep;
@@ -30,6 +31,7 @@ public class ProspectingUserProviderImpl implements ProspectingUserProvider {
         prospectingUser.setEmail(email);
         prospectingUser.setCreatedTimestamp(System.currentTimeMillis());
         prospectingUser.setReamId(realm.getId());
+        prospectingUser.setStatus(UserStatus.PREPARE.getCode());
 
         em.persist(prospectingUser);
         em.flush();

@@ -26,4 +26,8 @@ public class ProspectingUser {
     @Column(name = "CREATED_TIMESTAMP", nullable = false)
     private Long createdTimestamp;
 
+    @Column(name = "STATUS", nullable = false)
+    private String status;
+
+
 }
