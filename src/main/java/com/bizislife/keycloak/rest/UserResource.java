@@ -76,8 +76,13 @@ public class UserResource {
 		if (!isActionForProspectingAllowed(auth, prospectingUser)) {
 			return Response.status(Response.Status.FORBIDDEN).build();
 		}
-		ProspectingUserRep user = session.getProvider(ProspectingUserProvider.class).addProspectingUser(auth.getSession().getRealm(), prospectingUser.getId(), prospectingUser.getEmail());
-		return Response.ok(user).build();
+		try {
+			ProspectingUserRep user = session.getProvider(ProspectingUserProvider.class).addProspectingUser(auth.getSession().getRealm(), prospectingUser.getId(), prospectingUser.getEmail());
+			return Response.ok(user).build();
+		} catch (Exception e) {
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+		}
+
 	}
 
 	// only biz admin user or client account with same same realm Id can do it
