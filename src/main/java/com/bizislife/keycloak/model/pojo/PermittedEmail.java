@@ -25,7 +25,7 @@ public class PermittedEmail {
     private String email;
 
     @Column(name = "REALM_ID", nullable = false)
-    private String reamId;
+    private String realmId;
 
     @Column(name = "CREATED_TIMESTAMP", nullable = false)
     private Long createdTimestamp;

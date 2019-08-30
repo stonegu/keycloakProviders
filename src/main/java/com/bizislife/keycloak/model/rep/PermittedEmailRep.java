@@ -19,7 +19,7 @@ public class PermittedEmailRep {
     public PermittedEmailRep(PermittedEmail prospectingEmail) {
         this.id = prospectingEmail.getId();
         this.email = prospectingEmail.getEmail();
-        this.realmId = prospectingEmail.getReamId();
+        this.realmId = prospectingEmail.getRealmId();
         this.createdTime = new Date(prospectingEmail.getCreatedTimestamp());
     }
 }

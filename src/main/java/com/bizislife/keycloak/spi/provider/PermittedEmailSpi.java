@@ -1,7 +1,6 @@
 package com.bizislife.keycloak.spi.provider;
 
 import com.bizislife.keycloak.spi.PermittedEmailProvider;
-import com.bizislife.keycloak.spi.ProspectingUserProvider;
 import org.keycloak.provider.Provider;
 import org.keycloak.provider.ProviderFactory;
 import org.keycloak.provider.Spi;

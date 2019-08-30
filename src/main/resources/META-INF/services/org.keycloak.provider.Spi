@@ -1,2 +1,3 @@
 com.bizislife.keycloak.spi.provider.CompanySpi
 com.bizislife.keycloak.spi.provider.ProspectingUserSpi
+com.bizislife.keycloak.spi.provider.PermittedEmailSpi

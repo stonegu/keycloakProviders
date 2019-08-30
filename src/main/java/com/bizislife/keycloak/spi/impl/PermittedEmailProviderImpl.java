@@ -33,7 +33,7 @@ public class PermittedEmailProviderImpl implements PermittedEmailProvider {
         permittedEmail.setId(id);
         permittedEmail.setEmail(email);
         permittedEmail.setCreatedTimestamp(System.currentTimeMillis());
-        permittedEmail.setReamId(realm.getId());
+        permittedEmail.setRealmId(realm.getId());
 
         em.persist(permittedEmail);
         em.flush();
