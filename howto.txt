@@ -1,6 +1,6 @@
 1. mysql intergration: https://github.com/Codingpedia/codingmarks-api/wiki/Keycloak-MySQL-Setup
    NOTE: make sure that table create with CHARSET=utf8 COLLATE=utf8_unicode_ci
-
+         this document is also in my google driver
 2. my.ini for mysql: C:\ProgramData\MySQL\MySQL Server 5.7
 
 3. Issue during the integration:
