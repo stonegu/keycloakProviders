@@ -13,10 +13,12 @@
    * Realm Setting
    * Client Setting
    * User Setting
-      * customized attribute in token
-         * By User attribute
-         * By Group attribute
+      * customized attribute in access token
+         * By Client Scopes
+         * By User customized attribute
+         * By Group customized attribute
          * Aggregate & Multivalued Attribute
+   * keycloak.json
 ```
 ##1. mysql integration
 Check this link: [Keycloak MySQL Setup](https://github.com/Codingpedia/codingmarks-api/wiki/Keycloak-MySQL-Setup) 
@@ -108,7 +110,8 @@ or check the example in C:\Projects\keycloak\examples\providers\domain-extension
 
 ###7.2 Client Setting
 1. Access Type: confidential
-1. Authorization Enabled: ON
+1. Authorization Enabled: OFF
+   * OFF: will close Authorization tab on the top, and will remove ```"policy-enforcer":{}``` from *keycloak.json*
 1. Service Accounts Enabled: ON
    * With above settings, you call get client access token
    ```
@@ -120,7 +123,7 @@ or check the example in C:\Projects\keycloak\examples\providers\domain-extension
       key: grant_type, value: client_credentials
    ```
    Note: Authorization in headers is calculated by client Id with client secret with Base64 encoding.
-1. Service Account Roles
+1. Service Account Roles Tab
    <br/>
    Setup roles for selected client. Default include *Realm Roles*, client *account roles*, *selected client roles*. 
    All these select roles will be in client access token. 
@@ -128,27 +131,89 @@ or check the example in C:\Projects\keycloak\examples\providers\domain-extension
    1. select client roles *realm-management -> view-realm* to allow selected client can view realm information.
    1. You can select client roles *realm-management -> realm-admin* to allow all!!
 
+####7.2.1 Audience
+With recent keycloak version 4.6.0 the client id is apparently no longer automatically added to the audience field 'aud' 
+of the access token. Therefore even though the login succeeds the client rejects the user. To fix this you need to 
+configure the audience for your clients.
+
+Next example for Keycloak version 11.0.2
+
+#####7.2.1.1 add from Client Scopes
+1. create a new scope like *customized_attr*
+1. create a mapper in *customized_attr*
+   <br/>
+   ```Name: audience, Mapper Type: Audience, Included Client Audience: your_client, Add to access token: ON```
+1. goto selected client, click Client Scopes tab, and add *customized_attr* in to Assigned Default Client Scopes.
+
+#####7.2.1.2 add from selected client *Mappers* tab
+1. goto selected client, click Mappers, create new mapper 
+<br/>
+```Name: audience, Mapper Type: Audience, Included Client Audience: selected_client```
+<br/>
+Note: I prefer this way for audience setup, because this map is specific for the selected client.
+
 ###7.3 User Setting
-####7.3.1 customized attribute in token
-#####7.3.1.1 By User attribute
+####7.3.1 customized attribute in access token
+#####7.3.1.1 By Client Scopes
+1. Select Client Scopes in left menu, and you find / create client scope, for example you select *profile*.
+1. You will find predefined *locale* in Mappers tab.
+1. Goto selected client, and Client Scopes tab, make sure *profile* is assigned.
+1. You now can goto selected user, and add *locale* in Attributes tab, and set value for this attribute.
+#####7.3.1.2 By User customized attribute
 1. add customized attribute in selected user -> Attributes
    <br/>
-   ```key: phone, value: 2222```
+   ```key: locale1, value: fr```
 1. go to selected client -> Mappers -> create
    <br/>
-   ```Name: phone, Mapper Type: User Attribute, User Attribute: phone, Token Claim Name: phone, Claim JSON Type: String```
-#####7.3.1.2 By Group attribute
+   ```Name: locale1, Mapper Type: User Attribute, User Attribute: locale1, Token Claim Name: locale1, Claim JSON Type: String```
+#####7.3.1.3 By Group customized attribute
 1. new group by Groups -> New
    <br/>
    ```Name: customized attribute```
-1. add attributes in selected group Attributes tag
+1. add attributes in selected group Attributes tab
    <br/>
-   ```key: locale, value: en```
+   ```key: locale1, value: en```
 1. selected user join group
-#####~~7.3.1.3 Aggregate & Multivalued Attribute (???)~~
+#####7.3.1.4 Aggregate & Multivalued Attribute
 1. Aggregate attribute values: ON, Multivalued: ON
    <br/>
    attribute as list from both group and user
 1. Aggregate attribute values: OFF, Multivalued: OFF
    <br/>
    only one value for the attribute, and user level attribute can override group level attribute.
+   
+###7.4 keycloak.json
+1. use-resource-role-mappings
+   <br/>
+   If set to true, the adapter will look inside the token for application level role mappings for the user. If false, it 
+   will look at the realm level for user role mappings. This is OPTIONAL. The default value is false.
+   <br/>
+   Example:
+   <br/>
+   If you have ```antMatchers("/realm/**").hasRole("USER")```, and your keycloak.json has 
+   ```"use-resource-role-mappings": true,``` the adapter will look inside the token for application(client) level role 
+   mappings for the user. Which means that the user's client roles has *user* role.
+   <br/>
+   your access token:
+   <br/>
+   ```
+   "resource_access": {
+     "vanilla": {
+       "roles": [
+         "user"
+       ]
+     }
+   },
+   ```
+   But if ```"use-resource-role-mappings": false,``` the adapter will look inside the token for realm level role 
+   mappings for the user. Which means that the user's realm roles has *user* role.
+   <br/>
+   your access token:
+   <br/>
+   ```
+   "realm_access": {
+     "roles": [
+       "user"
+     ]
+   },      
+   ```
