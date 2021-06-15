@@ -446,7 +446,7 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
-                    <connection-url>jdbc:mysql://localhost:3306/keycloak11?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8</connection-url>
+                    <connection-url>jdbc:mysql://localhost:3306/keycloak13?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8</connection-url>
                     <driver>mysql</driver>
                     <pool>
                         <min-pool-size>5</min-pool-size>
@@ -467,7 +467,7 @@
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
                     </driver>
                     <driver name="mysql" module="com.mysql">
-                        <driver-class>com.mysql.jdbc.Driver</driver-class>
+                        <driver-class>com.mysql.cj.jdbc.Driver</driver-class>
                     </driver>
                 </drivers>
             </datasources>
