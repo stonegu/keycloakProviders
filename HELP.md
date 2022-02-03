@@ -35,7 +35,7 @@ I manually update the keycloak table because some issues happened during the ser
    1. update below two properties in standalone.xml for manual tables update
       * ```<property name="initializeEmpty" value="false"/>```
       * ```<property name="migrationStrategy" value="manual"/>```
-      * check the description here: [Keycloak MySQL Setup](ttps://github.com/Codingpedia/codingmarks-api/wiki/Keycloak-MySQL-Setup)
+      * check the description here: [Keycloak MySQL Setup](https://github.com/Codingpedia/codingmarks-api/wiki/Keycloak-MySQL-Setup)
    1. run keycloak-database-update.sql
    1. make sure connection-url in standalone.xml for characterEncoding is 'UTF-8'
    
@@ -46,6 +46,37 @@ NOTE: initial admin account is : admin : admin
 
 ##5. SMTP Server
 ```bizislife2019@gmail.com : stone0331```
+###5.1 Intro
+Keycloak requires email configuration to
+* verify email address of user
+* allow user to set own password
+###5.2 Assign email address to admin account
+Use Keycloak Account Management to add email address in Personal Info
+
+The below steps work for Keycloak 13 but UI may change with time
+* Login to Keycloak Security Admin Console using admin credentials
+* Click admin name shown in the top right corner
+* Click Manage account
+* Click Personal Info
+* Enter email address
+###5.3 Configure Email Settings
+1. Open a realm
+2. Under Realm Settings > Email the following details will work for a Gmail account
+   * Host: smtp.gmail.com
+   * Port: 587 (for SSL, use 465)
+   * From: admin-email-address 
+   * Enable StartTLS: On (for SSL, use Enable SSL)
+   * Enable Authentication: On 
+   * Username: username 
+   * Password: password
+###5.4 Configure Gmail
+If the admin account is a Gmail account, the below steps are required
+
+* Login to the Gmail account in a browser 
+* Visit https://www.google.com/settings/security/lesssecureapps
+  * Change the setting to On
+* Visit https://accounts.google.com/DisplayUnlockCaptcha
+  * Follow on-screen instructions, if any
 
 ##6. Service Provider Interfaces (SPI)
 Detailed document check this: [Service Provider Interfaces](https://www.keycloak.org/docs/latest/server_development/index.html#_providers)
