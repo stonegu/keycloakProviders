@@ -183,6 +183,17 @@ Next example for Keycloak version 11.0.2
 <br/>
 Note: I prefer this way for audience setup, because this map is specific for the selected client.
 
+####7.2.2 Keycloak client mapper to show the realm name
+* Select your realm;
+* Go to clients;
+* Select the client that you are going to request the token against;
+* Go to Mappers;
+* Click Create
+* In Mapper type select Hardcoded claim;
+* Token Claim Name : realm name
+* Claim value : the name of the realm.
+* Fill up the rest accordingly.
+
 ###7.3 User Setting
 ####7.3.1 customized attribute in access token
 #####7.3.1.1 By Client Scopes
