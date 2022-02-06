@@ -190,8 +190,19 @@ Note: I prefer this way for audience setup, because this map is specific for the
 * Go to Mappers;
 * Click Create
 * In Mapper type select Hardcoded claim;
-* Token Claim Name : realm name
+* Token Claim Name : realm_name
 * Claim value : the name of the realm.
+* Fill up the rest accordingly.
+
+####7.2.3 Keycloak client mapper to show the client name
+* Select your realm;
+* Go to clients;
+* Select the client that you are going to request the token against;
+* Go to Mappers;
+* Click Create
+* In Mapper type select Hardcoded claim;
+* Token Claim Name : client_name
+* Claim value : the name of the client.
 * Fill up the rest accordingly.
 
 ###7.3 User Setting

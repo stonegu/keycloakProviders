@@ -5,14 +5,14 @@ import java.nio.charset.StandardCharsets;
 
 public class ConfigDataCalculator {
 	public static void main(String... args) throws UnsupportedEncodingException {
-        long date1 = 1607293659 - 1607293299;
+        long date1 = 1643925308 - 1643924948;
 
         long date2 = 1548431773 - 1547826973;
 
         System.out.println(date1 / 60 + " mins - access");
         System.out.println(date2 / 60 + " mins - refresh");
 
-        System.out.println("security header: " + createSecureHeader("vanilla", "7dfc84a0-7803-4c28-87da-0574bdc96afe"));
+        System.out.println("security header: " + createSecureHeader("testClient01", "Yx9Aw2cNKjMoC5rtTkPf02ejqqnYrWOF"));
 		
 	}
 
